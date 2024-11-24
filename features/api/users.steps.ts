@@ -21,7 +21,7 @@ When("I create a user with the random email", async ({ userApi }) => {
 });
 
 Then("the response should have status code {int}", ({}, statusCode) => {
-    expect.soft(response.statusCode).toBe(statusCode);
+     expect.soft(response.statusCode).toBe(statusCode);
 });
 
 Then("the response body should include:", async ({}, data: DataTable) => {
