@@ -16,7 +16,7 @@ Given("I have a random email", () => {
 });
 
 When("I create a user with the random email", async ({ userApi }) => {
-    response = await userApi.createUser(userData.customUser({ email }));
+    response =  await userApi.createUser(userData.customUser({ email }));
     createdUser = response.body;
 });
 
