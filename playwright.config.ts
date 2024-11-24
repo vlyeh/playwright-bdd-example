@@ -1,5 +1,9 @@
 import { defineConfig, devices } from "@playwright/test";
 import { defineBddConfig, cucumberReporter } from "playwright-bdd";
+import dotenv from 'dotenv';
+dotenv.config();
+console.log(process.env.TOKEN);
+console.log(process.env.ENV_URL);
 
 const testDir = defineBddConfig({
   features: "features/**/*.feature",
@@ -7,6 +11,16 @@ const testDir = defineBddConfig({
 });
 
 export default defineConfig({
+  use: {
+    baseURL: process.env.ENV_URL,
+    extraHTTPHeaders: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      Authorization: 'Bearer '+ process.env.TOKEN
+    },
+    screenshot: "on",
+    trace: "on",
+  },
   testDir,
   reporter: [
     cucumberReporter("html", {
@@ -16,14 +30,10 @@ export default defineConfig({
     }),
     ["html", { open: "never" }],
   ],
-  use: {
-    screenshot: "on",
-    trace: "on",
-  },
   projects: [
     {
-      name: "chromium",
-      use: { ...devices["Desktop Chrome"] },
+      name: "api",
+      use: { ...devices["REST API"] },
     },
   ],
 });

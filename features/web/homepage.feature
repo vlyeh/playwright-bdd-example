@@ -4,4 +4,3 @@ Feature: Playwright Home Page
         Given I am on Playwright home page
         When I click link "Get started"
         Then I see in title "Installation"
-  
